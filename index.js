@@ -29,10 +29,12 @@ var Store = function(state) {
     },
     emitChange: function() {
       this.emit(CHANGE_EVENT);
+    },
+    destroy: function() {
+      Influx._stores = Influx._stores.splice(1, storeIndex);
     }
   });
-
-  Influx._stores.push(store);
+  var storeIndex = Influx._stores.push(store);
   return store;
 };
 
@@ -42,8 +44,8 @@ var Action = function(action) {
   Influx._stores.forEach(function(store) {
     if (store.handlers[action]) {
       handled = true;
-      store.handlers[action].forEach((h) => h.apply(this, args));
-      store.callbacks.forEach((cb) => cb());
+      store.handlers[action].forEach(function(h) { h.apply(store, args); });
+      store.callbacks.forEach(function(cb) { cb(); });
       store.emitChange();
     }
   });
@@ -56,9 +58,7 @@ var Influx = {
   change: CHANGE_EVENT,
   Store: Store,
   Action: Action,
-
   _stores: []
 };
 
 module.exports = Influx;
-

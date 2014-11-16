@@ -1,24 +1,26 @@
 {
-  "name": "influx",
-  "version": "0.0.1",
-  "description": "",
+  "name": "miniflux",
+  "version": "0.1.0",
+  "description": "a small flux implementation for react apps",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha test"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:dfrnswrth/influx.git"
+    "url": "git@github.com:dfrnswrth/miniflux.git"
   },
   "author": "dfrnswrth",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dfrnswrth/influx/issues"
+    "url": "https://github.com/dfrnswrth/miniflux/issues"
   },
-  "homepage": "https://github.com/dfrnswrth/influx",
+  "homepage": "https://github.com/dfrnswrth/miniflux",
   "devDependencies": {
     "grunt": "^0.4.5",
-    "react": "^0.12.0"
+    "mocha": "^2.0.1",
+    "should": "^4.3.0",
+    "sinon": "^1.11.1"
   },
   "dependencies": {
     "object-assign": "^1.0.0"
