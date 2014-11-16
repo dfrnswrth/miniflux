@@ -1,6 +1,8 @@
 miniflux
 ========
 
+[![Build Status](https://travis-ci.org/dfrnswrth/miniflux.svg?branch=master)](https://travis-ci.org/dfrnswrth/miniflux)
+
 **A Boilerplate-Free Flux(ish) Library for React Apps**
 
 Overview
@@ -56,7 +58,7 @@ API
 ### `miniflux.Store()`
 Returns a store instance.
 ##### `#registerHandler(name, method)`
-`name`: *string* name of action to handle
+`name`: *string* name of action to handle    
 `method`: *function of array of functions* that handle the action. Context is bound to the store instance being handled.
 
 ##### `#registerCallback(method)`
