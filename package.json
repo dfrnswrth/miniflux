@@ -1,7 +1,7 @@
 {
   "name": "miniflux",
   "version": "0.1.0",
-  "description": "a small flux implementation for react apps",
+  "description": "A Boilerplate-Free Flux(ish) Library for React Apps",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha test"
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git@github.com:dfrnswrth/miniflux.git"
   },
-  "author": "dfrnswrth",
+  "author": "Dylan Farnsworth / @dfrnswrth",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/dfrnswrth/miniflux/issues"
