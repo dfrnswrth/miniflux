@@ -3,7 +3,7 @@ miniflux
 
 [![Build Status](https://travis-ci.org/dfrnswrth/miniflux.svg?branch=master)](https://travis-ci.org/dfrnswrth/miniflux)
 
-**A Boilerplate-Free Flux(ish) Library for React Apps**
+**A Small Boilerplate-Free Flux(ish) Library for React Apps**
 
 Overview
 --------
@@ -62,14 +62,13 @@ Returns a store instance.
 `method`: *function of array of functions* that handle the action. Context is bound to the store instance being handled.
 
 ##### `#registerCallback(method)`
-`method`: *function* called before each change event is emitted.
+`method`: *function* called before each change event is emitted. Bound to the store context.
+
+*note*: Action handlers and callbacks may be associated with multiple stores.
 
 ##### `#destroy()`
 Removes the store from the miniflux registry.
 
 ### `miniflux.Action(action)`
 Checks all stores for handlers assigned to `action`. If `action` is handled by a store, that stores callbacks (if any) are called, followed by the store emitting the `miniflux.change` event. Throws an error is nothing handles `action`.
-
-
-
 
