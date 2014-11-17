@@ -45,7 +45,7 @@ var Action = function(action) {
     if (store.handlers[action]) {
       handled = true;
       store.handlers[action].forEach(function(h) { h.apply(store, args); });
-      store.callbacks.forEach(function(cb) { cb(); });
+      store.callbacks.forEach(function(cb) { cb.apply(store); });
       store.emitChange();
     }
   });

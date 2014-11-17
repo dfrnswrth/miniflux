@@ -38,6 +38,18 @@ describe('Influx', function() {
     should(fooHandler.called).be.true;
     should(callback.called).be.true;
   });
+  it('callbacks and handlers are bound to the store context', function() {
+    store = Influx.Store({foo: 'bar'});
+    var fooHandler = function() {
+      should(this).eql(store);
+    };
+    var callback = function() {
+      should(this).eql(store);
+    };
+    store.registerHandler('fooAction', fooHandler);
+    store.registerCallback(callback);
+    Influx.Action('fooAction');
+  });
   it('registerCallback is chainable', function() {
     store = Influx.Store({foo: 'bar'});
     var fooHandler1 = sinon.spy();
