@@ -2,25 +2,25 @@ var assign = require('object-assign');
 var EventEmitter = require('events').EventEmitter;
 var CHANGE_EVENT = 'change';
 
+function errorIf(condition, message) {
+  if (condition) {
+    throw new Error(message);
+  }
+}
+
 var Store = function(state) {
   var store = assign({}, EventEmitter.prototype, {
     handlers: {},
     callbacks: [],
     state: state,
     registerHandler: function(name, method) {
-      if (!method) {
-        throw new Error('Handlers must have a function');
-      }
-      if (this.handlers[name]) {
-        throw new Error('Handler already defined on this store for ' + name);
-      }
+      errorIf(!method, 'Handlers must have a function');
+      errorIf(this.handlers[name], 'Handler already defined on this store for ' + name);
       this.handlers[name] = typeof method === 'function' ? [method] : method;
       return this;
     },
     registerCallback: function(method) {
-      if (!method) {
-        throw new Error('Callbacks must have a function');
-      }
+      errorIf(!method, 'Callbacks must have a function');
       this.callbacks.push(method);
       return this;
     },
@@ -49,9 +49,7 @@ var Action = function(action) {
       store.emitChange();
     }
   });
-  if (!handled) {
-    throw new Error('Nothing handled this action: ' + action);
-  }
+  errorIf(!handled, 'Nothing handled this action: ' + action);
 };
 
 var Influx = {
