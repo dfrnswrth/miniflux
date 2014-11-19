@@ -10,6 +10,8 @@ Overview
 
 `npm install --save miniflux`
 
+Examples below assume browserify. `dist/` contains standalone builds if that's what you need.
+
 Create a store with some initial state, and register any action handlers and callbacks.
 
 ```js
@@ -72,3 +74,6 @@ Removes the store from the miniflux registry.
 ### `miniflux.Action(action)`
 Checks all stores for handlers assigned to `action`. If `action` is handled by a store, that stores callbacks (if any) are called, followed by the store emitting the `miniflux.change` event. Throws an error is nothing handles `action`.
 
+LICENSE
+-------
+MIT
