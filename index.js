@@ -31,17 +31,17 @@ var Store = function(state) {
       this.emit(CHANGE_EVENT);
     },
     destroy: function() {
-      Influx._stores = Influx._stores.splice(1, storeIndex);
+      Miniflux._stores = Miniflux._stores.splice(1, storeIndex);
     }
   });
-  var storeIndex = Influx._stores.push(store);
+  var storeIndex = Miniflux._stores.push(store);
   return store;
 };
 
 var Action = function(action) {
   var args = Array.prototype.slice.call(arguments, 1);
   var handled = false;
-  Influx._stores.forEach(function(store) {
+  Miniflux._stores.forEach(function(store) {
     if (store.handlers[action]) {
       handled = true;
       store.handlers[action].forEach(function(h) { h.apply(store, args); });
@@ -52,11 +52,11 @@ var Action = function(action) {
   errorIf(!handled, 'Nothing handled this action: ' + action);
 };
 
-var Influx = {
+var Miniflux = {
   change: CHANGE_EVENT,
   Store: Store,
   Action: Action,
   _stores: []
 };
 
-module.exports = Influx;
+module.exports = Miniflux;

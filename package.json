@@ -18,6 +18,7 @@
   "homepage": "https://github.com/dfrnswrth/miniflux",
   "devDependencies": {
     "grunt": "^0.4.5",
+    "grunt-browserify": "^3.2.0",
     "grunt-contrib-concat": "^0.5.0",
     "grunt-contrib-uglify": "^0.6.0",
     "load-grunt-tasks": "^1.0.0",
