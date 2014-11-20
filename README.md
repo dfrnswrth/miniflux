@@ -68,6 +68,9 @@ Returns a store instance.
 
 *note*: Action handlers and callbacks may be associated with multiple stores.
 
+##### `#currentState()`
+Returns the current value of `state`
+
 ##### `#destroy()`
 Removes the store from the miniflux registry.
 
