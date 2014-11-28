@@ -29,11 +29,13 @@ var MyStore = Flux.Store(initialState)
 function handleAction() {
   // called when miniflux dispatches `myAction`
   // `this` is the instance of miniflux.Store
+  this.state.foo = 'baz';
 }
 
 function aCallback() {
   // called after the store handles any action
   // before `miniflux.change` is emitted.
+  this.state.lastChanged = new Date();
 }
 ```
 
