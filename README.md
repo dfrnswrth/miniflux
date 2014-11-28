@@ -5,6 +5,9 @@ miniflux
 
 **A Small Boilerplate-Free Flux(ish) Library for React Apps**
 
+[JSBin](http://dfrnswrth.jsbin.com/gafaje)
+
+
 Overview
 --------
 
