@@ -61,12 +61,20 @@ var MyComponent = React.createClass({
 
 API
 ---
+### `Flux.change`
+Change event. Defaults to 'change';
 
-### `miniflux.Store()`
+### `miniflux.Store([state, [changeEvent]])`
 Returns a store instance.
+
+`state`: the initial state of the store
+`changeEvent`: name || type of event to be emitted. Defaults to 'change'.
+
 ##### `#registerHandler(name, method)`
 `name`: *string* name of action to handle    
 `method`: *function of array of functions* that handle the action. Context is bound to the store instance being handled.
+
+if `method` returns `false`, the store responding to event `name` will not emit envoking all action handlers. 
 
 ##### `#registerCallback(method)`
 `method`: *function* called before each change event is emitted. Bound to the store context.

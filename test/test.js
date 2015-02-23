@@ -70,6 +70,28 @@ describe('Miniflux', function() {
     Miniflux.Action('fooAction');
     should(eventListener.called).be.true;
   });
+  it('can emit a custom change event', function() {
+    store = Miniflux.Store({foo: 'bar'}, 'customChange');
+    var eventListener = sinon.spy();
+    store.on('customChange', eventListener)
+    var fooHandler = sinon.spy();
+    store.registerHandler('fooAction', fooHandler);
+    Miniflux.Action('fooAction');
+    should(eventListener.called).be.true;
+  });
+  it('doesn\'t emit if a handler returns false', function() {
+    store = Miniflux.Store({foo: 'bar'}, 'customChange');
+    var spy = sinon.spy();
+    var eventListener = function() {
+      spy();
+      return false;
+    };
+    store.on('customChange', eventListener)
+    var fooHandler = sinon.spy();
+    store.registerHandler('fooAction', fooHandler);
+    Miniflux.Action('fooAction');
+    should(eventListener.called).not.be.true;
+  });
   it('change events emitted only once', function() {
     store = Miniflux.Store({foo: 'bar'});
     var eventListener = sinon.spy();

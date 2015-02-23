@@ -8,11 +8,12 @@ function errorIf(condition, message) {
   }
 }
 
-var Store = function(state) {
+var Store = function(state, changeEvent) {
   var store = assign({}, EventEmitter.prototype, {
     handlers: {},
     callbacks: [],
     state: state,
+    changeEvent: changeEvent || CHANGE_EVENT,
     registerHandler: function(name, method) {
       errorIf(!method, 'Handlers must have a function');
       errorIf(this.handlers[name], 'Handler already defined on this store for ' + name);
@@ -28,7 +29,7 @@ var Store = function(state) {
       return this.state;
     },
     emitChange: function() {
-      this.emit(CHANGE_EVENT);
+      this.emit(this.changeEvent);
     },
     destroy: function() {
       Miniflux._stores = Miniflux._stores.splice(1, storeIndex);
@@ -43,10 +44,17 @@ var Action = function(action) {
   var handled = false;
   Miniflux._stores.forEach(function(store) {
     if (store.handlers[action]) {
+      var shouldEmit = true;
       handled = true;
-      store.handlers[action].forEach(function(h) { h.apply(store, args); });
-      store.callbacks.forEach(function(cb) { cb.apply(store); });
-      store.emitChange();
+      store.handlers[action].forEach(function(h) {
+        shouldEmit = shouldEmit !== false ? h.apply(store, args) : false;
+      });
+      store.callbacks.forEach(function(cb) {
+        shouldEmit = shouldEmit !== false ? cb.apply(store) : false;
+      });
+      if (shouldEmit !== false) {
+        store.emitChange();
+      }
     }
   });
   errorIf(!handled, 'Nothing handled this action: ' + action);
